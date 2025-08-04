@@ -20,4 +20,4 @@ Uma calculadora simples feita em Python puro, desenvolvida por mim como prática
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/calculadora-python.git
+   git clone https://github.com/Henryqze/Calculadora-Dom-Casmurro.git
