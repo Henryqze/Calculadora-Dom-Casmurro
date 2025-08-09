@@ -1,59 +1,63 @@
+import time
+
+def tempo():
+    mensagem = "Retornando para o menu..."
+    for x in mensagem:
+        time.sleep(0.3)
+        print(x, end='', flush=True)
+    print()
+
+        
 def menu():
-    lista = {
+    menu = {
         1: "soma",
         2: "subtração",
         3: "divisão",
         4: "multiplicação",
         5: "sair"
     }
-    for k, v in lista.items():
+    print("=-="*40)    
+    print("Bem-vindo a calculadora Dom Casmurro.")
+    print("=-="*40)
+    for k, v in menu.items():
         print(f"{k} - {v}")
 
-
-print("Bem-vindo a calculadora Dom Casmurro.")
-
+def lendo(mensagem):
+    while True:
+        try:
+            valor = input(mensagem).replace(',','.')
+            return float(valor)
+        except ValueError:
+            print("Entradas inválidas, tente novamente.")
+    
+def contas(operacao, num1, num2):
+    match operacao:
+        case 1:
+            return num1 + num2
+        case 2:
+            return num1 - num2
+        case 3:
+            if num2 == 0:
+                return "Error: Divisão por zero"
+            return num1 / num2
+        case 4:
+            return num1 * num2
 while True:
+    menu()
     try:
-        print("=-="*40)
-        menu()
-        print("=-="*40)
         escolha = int(input("Escolha uma opção: "))
-        match escolha:
-            case 1:
-                print("Escolheu a opção de soma.")
-                num1 = float(input("Digite um número: ").replace(",", "."))
-                num2 = float(input("Digite um número novamente: ").replace(",", "."))
-                soma = num1 + num2
-                print(f"seu resultado de {num1} + {num2} é {soma}")
-                continue
-            case 2:
-                print("Escolheu a opção de subtração.")
-                num1 = float(input("Digite um número: ").replace(",", "."))
-                num2 = float(input("Digite um número novamente: ").replace(",", "."))
-                subtração = num1 - num2
-                print(f"A resultado de {num1} - {num2} é {subtração}")
-                continue
-            case 3:
-                print("Escolheu a opção de divisão.")
-                num1 = float(input("Digite um número: ").replace(",", "."))
-                num2 = float(input("Digite um número novamente: ").replace(",", "."))
-                divisão = num1 / num2
-                print(f"A resultado de {num1} / {num2} é {divisão}")
-            case 4:
-                print("Escolheu a opção de multiplicação.")
-                num1 = float(input("Digite um número: ").replace(",", "."))
-                num2 = float(input("Digite um número novamente: ").replace(",", "."))
-                multiplicacao = num1 * num2
-                print(f"A resultado de {num1} x {num2} é {multiplicacao}")
-            case 5:
-                sair = input("Deseja sair: ")
-                if sair == "s":
-                    exit()
-                elif sair == "n":
-                    continue
-                else:
-                    print("Não compreendi, tente novamente.")
-            case _:
-                print("Não existe essa opção, tente novamente.")
     except ValueError:
         print("Erro, tente novamente.")
+        continue
+    match escolha:
+        case 5:
+            print("Saindo...")
+            break
+        case 1 | 2 | 3 | 4:
+            num1 = lendo("Digite um número: ")
+            num2 = lendo("Digite um número: ")
+            total = contas(escolha, num1, num2)
+            print(f"O resultado da sua conta foi {total}")
+            tempo()
+        case _:
+            print(f"A opção {escolha} não foi encontrada, tente novamente.")
